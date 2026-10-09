@@ -81,7 +81,7 @@ export default function Navbar({ backendStatus, onNavigate }) {
                   ? 'bg-emerald-50 text-emerald-800 border-emerald-200' 
                   : 'bg-amber-50 text-amber-800 border-amber-200'
               }`}
-              title={backendStatus?.connected ? "Flask ML backend active (Model loaded: 92.5% accuracy)" : "Flask backend offline"}
+              title={backendStatus?.connected ? `Flask ML backend active (Benchmark Accuracy: ${backendStatus?.details?.metrics?.accuracy ? (backendStatus.details.metrics.accuracy * 100).toFixed(2) + '%' : '92.47%'})` : "Flask backend offline"}
             >
               <span className="relative flex h-2 w-2">
                 {backendStatus?.connected && (
@@ -89,7 +89,7 @@ export default function Navbar({ backendStatus, onNavigate }) {
                 )}
                 <span className={`relative inline-flex rounded-full h-2 w-2 ${backendStatus?.connected ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
               </span>
-              <span>{backendStatus?.connected ? 'Model Ready (92.5% Acc)' : 'Backend Offline'}</span>
+              <span>{backendStatus?.connected ? `Model Ready (${backendStatus?.details?.metrics?.accuracy ? (backendStatus.details.metrics.accuracy * 100).toFixed(1) + '%' : '92.5%'})` : 'Backend Offline'}</span>
             </div>
 
             {/* Analyze Button */}
@@ -123,7 +123,7 @@ export default function Navbar({ backendStatus, onNavigate }) {
               backendStatus?.connected ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
             }`}>
               <span className={`h-1.5 w-1.5 rounded-full ${backendStatus?.connected ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
-              {backendStatus?.connected ? 'ML Model Online' : 'Backend Offline'}
+              {backendStatus?.connected ? `ML Model Online (${backendStatus?.details?.metrics?.accuracy ? (backendStatus.details.metrics.accuracy * 100).toFixed(1) + '%' : '92.5%'})` : 'Backend Offline'}
             </span>
           </div>
 

@@ -10,8 +10,10 @@ import re
 import json
 import joblib
 import numpy as np
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
+
+DIST_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist")
 
 app = Flask(__name__)
 # Enable CORS for all routes (supporting local development on any port)
@@ -242,6 +244,22 @@ def analyze_content():
     }
 
     return jsonify(response_payload), 200
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_frontend(path):
+    """Serves the production built React frontend for unified deployment."""
+    if path != "" and os.path.exists(os.path.join(DIST_DIR, path)):
+        return send_from_directory(DIST_DIR, path)
+    index_path = os.path.join(DIST_DIR, "index.html")
+    if os.path.exists(index_path):
+        return send_from_directory(DIST_DIR, "index.html")
+    return jsonify({
+        "service": "TruthCheck AI Misinformation Analysis Engine",
+        "status": "online",
+        "hackathon": "Cyber AI Hackathon 2026",
+        "endpoints": ["/api/health", "/api/analyze"]
+    }), 200
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

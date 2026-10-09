@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: truthcheck-platform
+    env: python
+    plan: free
+    buildCommand: "pip install -r backend/requirements.txt && cd frontend && npm install && npm run build && cd .."
+    startCommand: "gunicorn --chdir backend app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: NODE_VERSION
+        value: 20
