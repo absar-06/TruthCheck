@@ -1,0 +1,45 @@
+{
+  "dataset_name": "McIntire Fake/Real News Benchmark",
+  "total_samples": 6306,
+  "train_samples": 5044,
+  "test_samples": 1262,
+  "accuracy": 0.9247,
+  "precision": 0.9024,
+  "recall": 0.9525,
+  "f1_score": 0.9268,
+  "confusion_matrix": {
+    "true_negative": 566,
+    "false_positive": 65,
+    "false_negative": 30,
+    "true_positive": 601
+  },
+  "classification_report": {
+    "Reliable": {
+      "precision": 0.9496644295302014,
+      "recall": 0.8969889064976229,
+      "f1-score": 0.9225753871230644,
+      "support": 631.0
+    },
+    "Misleading": {
+      "precision": 0.9024024024024024,
+      "recall": 0.9524564183835182,
+      "f1-score": 0.9267540478026214,
+      "support": 631.0
+    },
+    "accuracy": 0.9247226624405706,
+    "macro avg": {
+      "precision": 0.926033415966302,
+      "recall": 0.9247226624405706,
+      "f1-score": 0.9246647174628428,
+      "support": 1262.0
+    },
+    "weighted avg": {
+      "precision": 0.9260334159663018,
+      "recall": 0.9247226624405706,
+      "f1-score": 0.924664717462843,
+      "support": 1262.0
+    }
+  },
+  "algorithm": "Logistic Regression with TF-IDF (1-2 grams)",
+  "features_count": 5000
+}
